@@ -1,9 +1,7 @@
 # react_nunitopay
 
 ## Project setup
-```
 install python [Reference](https://www.python.org/)
-```
 
 ### Compiles and hot-reloads for development
 ```
