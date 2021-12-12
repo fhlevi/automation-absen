@@ -12,7 +12,7 @@ load_dotenv(find_dotenv())
 
 browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
-link = 'https://aos.metranet.co.id/'
+link = os.getenv('LINK') 
 
 browser.get(link)
 
