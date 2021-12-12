@@ -24,7 +24,6 @@ browser.find_element(By.ID, 'txtusername').send_keys(nik)
 browser.find_element(By.ID, 'txtpassword').send_keys(password)
 time.sleep(2)
 browser.find_element(By.ID, 'btnsubmit').click()
-time.sleep(2)
 
 # checkin
 browser.find_element(By.ID, 'txtnik').send_keys(nik)
@@ -32,7 +31,6 @@ browser.find_element(By.XPATH, '//*[@id="txtworkloc"]/option[3]').click()
 browser.find_element(By.XPATH, '//*[@id="txtworkstatus"]/option[2]').click()
 time.sleep(2)
 browser.find_element(By.XPATH, '//*[@id="btnsubmit"]').click()
-time.sleep(2)
 
 # checkout
 # browser.find_element(By.ID, 'txtnik').send_keys(nik)
