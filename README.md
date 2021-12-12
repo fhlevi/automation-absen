@@ -1,4 +1,4 @@
-# react_nunitopay
+# Automation Absensi
 
 ## Project setup
 install python [Reference](https://www.python.org/)
