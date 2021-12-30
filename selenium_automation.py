@@ -1,40 +1,22 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-# from selenium.webdriver.support.ui import WebDriverWait
-# from selenium.common.exceptions import TimeoutException
-# from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-import time
-import os
-from dotenv import load_dotenv, find_dotenv
-load_dotenv(find_dotenv())
+import config.config_browser as config_browser
+import config.config_env as config_env
+import config.config_date as config_date
+import auto_absen
 
-browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+config_browser.browser.get(config_env.link)
 
-link = os.getenv('LINK') 
+if((config_date.today != 'sabtu' or config_date.today != 'minggu') and config_env.is_active == 'true'):
+    # login
+    auto_absen.login_access()
 
-browser.get(link)
+    if config_date.dateNow.hour == 8:
+        if(config_date.dateNow.minute == 00):
+            # checkin
+            auto_absen.checkin()
+    else:
+        if(config_date.dateNow.minute == 00):
+            # checkout
+            auto_absen.checkout()
 
-nik = os.getenv('NIK')
-password = os.getenv('PASS')
-
-# login
-browser.find_element(By.ID, 'txtusername').send_keys(nik)
-browser.find_element(By.ID, 'txtpassword').send_keys(password)
-time.sleep(2)
-browser.find_element(By.ID, 'btnsubmit').click()
-
-# checkin
-browser.find_element(By.ID, 'txtnik').send_keys(nik)
-browser.find_element(By.XPATH, '//*[@id="txtworkloc"]/option[3]').click()
-browser.find_element(By.XPATH, '//*[@id="txtworkstatus"]/option[2]').click()
-time.sleep(2)
-browser.find_element(By.XPATH, '//*[@id="btnsubmit"]').click()
-
-# checkout
-# browser.find_element(By.ID, 'txtnik').send_keys(nik)
-# time.sleep(2)
-# browser.find_element(By.ID, 'btnsubmit').click()
-# time.sleep(3)
+config_browser.browser.close()
 
